@@ -1,0 +1,42 @@
+@startuml
+
+class Curso {
+  - codigoCurso: String
+  - nombreCurso: String
+  - periodosPorSemana: int
+  - diasSemana: String[]
+  - horario: String
+  - estudiantesInscritos: int
+  - profesorAsignado: Profesor
+  + asignarCurso(dia: String, hora: String): void
+  + cambiarHorario(nuevoDia: String, nuevaHora: String): void
+  + calcularEstudiantesSobrantes(capacidadLaboratorio: int): boolean
+}
+
+class Profesor {
+  - nombreCompleto: String
+  - carne: String
+  - correoElectronico: String
+  - telefono: String
+}
+
+class Laboratorio {
+  - horarioLaboratorio: String[]
+  - capacidadLaboratorio: int
+  + configurarNuevoSemestre(): void
+  + verificarDisponibilidad(dia: String, hora: String): boolean
+}
+
+class SistemaAsignacionSalones {
+  - horarioCursos: Curso[][]
+  + asignarCurso(curso: Curso, dia: int, hora: int): void
+  + obtenerCurso(dia: int, hora: int): Curso
+  // Otros métodos según necesidades
+}
+
+Curso -- Profesor : profesorAsignado
+SistemaAsignacionSalones -- Curso : contiene
+SistemaAsignacionSalones -- Profesor : contiene
+SistemaAsignacionSalones -- Laboratorio : contiene
+
+@enduml
